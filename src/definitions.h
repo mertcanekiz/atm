@@ -7,7 +7,11 @@
 #include <string.h>
 #include <ctype.h>
 
+#if defined _WIN32 || defined __CYGWIN__
 #include <ncursesw/ncurses.h>
+#else
+#include <ncurses.h>
+#endif
 #include <md5.h>
 
 #define BUFFER_SIZE 80
@@ -21,6 +25,10 @@ typedef struct User User;
 
 void md5_encode(char* src, char* dst);
 char* strip(char* str);
+
+#if !defined(_WIN32) && !defined(__CYGWIN__)
+char* strlwr(char* str);
+#endif
 
 int num_users;
 int id_counter;
