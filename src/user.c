@@ -80,6 +80,7 @@ User* signup()
         }
     }
     echo();
+    user->balance = 0;
     user->id = ++id_counter;
     users[num_users++] = user;
     return user;
