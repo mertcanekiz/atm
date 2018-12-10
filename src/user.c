@@ -1,7 +1,6 @@
 #include "user.h"
 #include "screens.h"
 
-
 bool validate_username(char* username)
 {
     strip(username);
@@ -12,7 +11,6 @@ bool validate_username(char* username)
     }
     return true;
 }
-
 
 bool validate_password(char* password)
 {
@@ -86,7 +84,6 @@ User* signup()
     return user;
 }
 
-
 User* login()
 {
     int x = MARGIN_LEFT, y = print_title("LOG IN") + 1;
@@ -145,12 +142,12 @@ void load_users()
     FILE *f;
     char buffer[BUFFER_SIZE];
 
-    f = fopen("res/users.csv", "r+");
+    f = fopen("users.csv", "r+");
     if (f == NULL) {
         mvprintw(0, 0, "Error while loading users from file");
         getch();
-        // exit(EXIT_FAILURE);
     }
+    
     int i = 0;
     unsigned int largest_id = 0;
     while (fgets(buffer, BUFFER_SIZE, (FILE*) f)) {
@@ -182,7 +179,7 @@ void load_users()
 void save_users()
 {
     FILE *f;
-    f = fopen("res/users.csv", "w+");
+    f = fopen("users.csv", "w+");
     if (f == NULL) {
         mvprintw(0, 0, "ERROR");
         getch();
