@@ -162,6 +162,10 @@ void load_users()
             token = strtok(NULL, delim);
             j++;
         }
+	if (j != 4) {
+	    free(user);
+	    break;
+	}
         user->id = (unsigned int) atoi(user_data[0]);
         strcpy(user->name, user_data[1]);
         strcpy(user->password, user_data[2]);
