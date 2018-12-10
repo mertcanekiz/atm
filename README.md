@@ -6,7 +6,7 @@ KON110E Project of Team 10
 ### Windows
 Double-click on `run.bat` or type into console:
 ```console
-C:\atm> .\run.bat
+.\run.bat
 ```
 
 ### Linux
