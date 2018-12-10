@@ -26,6 +26,10 @@ typedef struct User User; // Defined in "user.h"
 void md5_encode(char* src, char* dst);
 char* strip(char* str);
 
+#if !defined(_WIN32) && !defined(__CYGWIN__)
+char* _strlwr(char* str);
+#endif
+
 int num_users;
 int id_counter;
 int row, col;

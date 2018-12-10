@@ -140,7 +140,7 @@ void delete_account()
     int x = MARGIN_LEFT, y = print_title("DELETE ACCOUNT");
     mvprintw(row / 2, MARGIN_LEFT, "Type \"DELETE\" to confirm account deletion: ");
     getstr(input);
-    if (strcmp(strlwr(input), "delete") != 0) {
+    if (strcmp(_strlwr(input), "delete") != 0) {
         main_menu();
     }
 
