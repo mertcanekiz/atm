@@ -32,7 +32,6 @@ void welcome_screen()
     }
 }
 
-
 void main_menu()
 {
     int x = MARGIN_LEFT, y = print_title("MAIN MENU");
@@ -65,8 +64,6 @@ void main_menu()
             break;
     }
 }
-
-
 
 void settings()
 {
