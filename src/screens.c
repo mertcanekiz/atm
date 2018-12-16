@@ -1,3 +1,7 @@
+/*********************************************************************
+* Filename:   screens.c
+* Author:     Mertcan Ekiz (ekiz.mertcan@gmail.com)
+*********************************************************************/
 #include "screens.h"
 #include "application.h"
 
@@ -29,6 +33,8 @@ void welcome_screen()
         case 'q':
             quit();
             break;
+        default:
+            welcome_screen();
     }
 }
 

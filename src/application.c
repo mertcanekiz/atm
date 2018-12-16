@@ -1,3 +1,7 @@
+/*********************************************************************
+* Filename:   application.c
+* Author:     Mertcan Ekiz (ekiz.mertcan@gmail.com)
+*********************************************************************/
 #include "application.h"
 
 void init()

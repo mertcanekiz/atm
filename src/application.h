@@ -1,3 +1,7 @@
+/*********************************************************************
+* Filename:   application.h
+* Author:     Mertcan Ekiz (ekiz.mertcan@gmail.com)
+*********************************************************************/
 #ifndef APPLICATION_H
 #define APPLICATION_H
 

@@ -1,3 +1,7 @@
+/*********************************************************************
+* Filename:   user.c
+* Author:     Mertcan Ekiz (ekiz.mertcan@gmail.com)
+*********************************************************************/
 #include "user.h"
 #include "screens.h"
 

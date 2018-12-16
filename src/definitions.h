@@ -1,3 +1,7 @@
+/*********************************************************************
+* Filename:   definitions.h
+* Author:     Mertcan Ekiz (ekiz.mertcan@gmail.com)
+*********************************************************************/
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
@@ -21,7 +25,7 @@
 
 #define BOLD(x) attron(A_BOLD); x; attroff(A_BOLD);
 
-typedef struct User User; // Defined in "user.h"
+typedef struct User User; // Originally defined in "user.h"
 
 void md5_encode(char* src, char* dst);
 char* strip(char* str);
