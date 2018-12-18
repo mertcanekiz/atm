@@ -1,0 +1,37 @@
+# Project: atm
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = src/application.o src/md5.o src/screens.o src/user.o
+LINKOBJ  = src/application.o src/md5.o src/screens.o src/user.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -lncursesw -L./lib
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = bin/atm.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) -I./include -std=c99
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+src/application.o: src/application.c
+	$(CC) -c src/application.c -o src/application.o $(CFLAGS)
+
+src/md5.o: src/md5.c
+	$(CC) -c src/md5.c -o src/md5.o $(CFLAGS)
+
+src/screens.o: src/screens.c
+	$(CC) -c src/screens.c -o src/screens.o $(CFLAGS)
+
+src/user.o: src/user.c
+	$(CC) -c src/user.c -o src/user.o $(CFLAGS)
