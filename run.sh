@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ ! -f "./bin/atm" ]
 then
 echo "Compiling..."
