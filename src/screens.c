@@ -42,8 +42,8 @@ void main_menu()
 {
     int x = MARGIN_LEFT, y = print_title("MAIN MENU");
     mvprintw(y++, x, "[1] View account details");
-    mvprintw(y++, x, "[2] -");
-    mvprintw(y++, x, "[3] -");
+    mvprintw(y++, x, "[2] Withdraw / deposit money");
+    mvprintw(y++, x, "[3] Transactions");
     mvprintw(y++, x, "[4] Settings");
     mvprintw(y++, x, "[5] List of customers");
     mvprintw(y++, x, "[q] Logout");
@@ -56,8 +56,10 @@ void main_menu()
             account_details();
             break;
         case '2':
+            withdraw_and_deposit();
             break;
         case '3':
+            transactions();
             break;
         case '4':
             settings();
@@ -68,6 +70,8 @@ void main_menu()
         case 'q':
             welcome_screen();
             break;
+        default:
+            main_menu();
     }
 }
 
@@ -171,6 +175,36 @@ void account_details()
     sprintf(msg, "Balance: %u TRY", current_user->balance);
     BOLD(mvprintw(row / 2, (col - strlen(msg)) / 2, "Balance: ")); printw("%u TRY", current_user->balance);
     BOLD(mvprintw(row - 1, 0, "Press any key to return to the main menu..."));
+    getch();
+    main_menu();
+}
+
+void withdraw_and_deposit()
+{
+    int x = MARGIN_LEFT, y = print_title("WITHDRAW / DEPOSIT MONEY");
+    mvprintw(y++, x, "[1] Withdraw money");
+    mvprintw(y++, x, "[2] Deposit Money");
+    mvprintw(y++, x, "[q] Main menu");
+    BOLD(mvprintw(row - 1, 1, "Enter your choice: "));
+    refresh();
+    char c = getch();
+    switch (c) {
+        case '1':
+            // TODO
+        break;
+        case '2':
+            // TODO
+        break;
+        case 'q':
+            // TODO (Well, not really, but this depends on the implementation of the above two cases.) [ Possible conflict with line 202 ]
+        break;
+    }
+    main_menu();
+}
+
+void transactions()
+{
+    int x = MARGIN_LEFT, y = print_title("TRANSACTIONS");
     getch();
     main_menu();
 }
