@@ -2,6 +2,9 @@
 ATM Simulator
 KON110E Project of Team 10
 
+- 040160420
+- 040170922
+
 ## Instructions
 ### Windows
 Double-click on `run.bat` or type into console:
