@@ -18,7 +18,8 @@ void load_users();
 void save_users();
 User* signup();
 User* login();
-User* get_user(char* username);
+User* get_user_by_name(char* username);
+User* get_user_by_id(unsigned int id);
 bool validate_username(char* username);
 bool validate_password(char* password);
 

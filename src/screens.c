@@ -97,7 +97,7 @@ void settings()
         case 'q':
             main_menu();
     }
-    main_menu();
+    settings();
 }
 
 void change_username()
@@ -190,21 +190,110 @@ void withdraw_and_deposit()
     char c = getch();
     switch (c) {
         case '1':
-            // TODO
+            withdraw_money();
         break;
         case '2':
-            // TODO
+            deposit_money();
         break;
         case 'q':
-            // TODO (Well, not really, but this depends on the implementation of the above two cases.) [ Possible conflict with line 202 ]
+            main_menu();
         break;
     }
-    main_menu();
+    withdraw_and_deposit();
+}
+
+void withdraw_money()
+{
+    int x = MARGIN_LEFT, y = print_title("WITHDRAW MONEY");
+    BOLD(mvprintw(y++, x, "Enter amount or type q to cancel: "));
+    getstr(input);
+    if (strcmp(input, "q") == 0) {
+        return;
+    }
+    unsigned int amount = (unsigned int) atoi(input);
+    unsigned int currencies[5] = { 200, 100, 50, 20, 10 };
+    unsigned int amounts[5] = { 0, 0, 0, 0, 0 };
+    if (current_user->balance < amount) {
+        mvprintw(y++, x, "Insufficient funds");
+        getch();
+    }
+    else if (amount % 10 != 0) {
+        mvprintw(y++, x, "You can only withdraw multiples of 10");
+        getch();
+    } else {
+        unsigned int large = (unsigned int) (amount * 0.8f);
+        unsigned int small = amount - large;
+        mvprintw(y++, x, "%%80: %u, %%20: %u", large, small);
+        int i = 0;
+        while (1) {
+            if (large >= currencies[i]) {
+                large -= currencies[i];
+                amounts[i]++;
+            } else {
+                if (i < 4)
+                    i++;
+                else
+                    break;
+            }
+        }
+
+        amounts[4] += (small / 10) + (large % 10 == 0 ? 0 : 1);
+
+        for (i = 0; i < 5; i++) {
+            if (amounts[i] != 0) {
+                mvprintw(y++, x, "%u: %u", currencies[i], amounts[i]);
+            }
+        }
+        current_user->balance -= amount;
+        getch();
+    }
+}
+
+void deposit_money()
+{
+    int x = MARGIN_LEFT, y = print_title("DEPOSIT MOENY");
+    unsigned int currencies[5] = { 200, 100, 50, 20, 10 };
+    unsigned int amounts[5];
+    unsigned int total = 0;
+    mvprintw(y++, x, "[200TL] x ");
+    mvprintw(y++, x, "[100TL] x ");
+    mvprintw(y++, x, "[ 50TL] x ");
+    mvprintw(y++, x, "[ 20TL] x ");
+    mvprintw(y++, x, "[ 10TL] x ");
+    for (int i = 0; i < 5; i++) {
+        move(y-5+i, x + strlen("[200TL] x "));
+        getstr(input);
+        amounts[i] = (unsigned int) atoi(input);
+        total += currencies[i] * amounts[i];
+    }
+    mvprintw(y++, x, "%uTL has been added to your balance", total);
+    current_user->balance += total;
+    getch();
 }
 
 void transactions()
 {
     int x = MARGIN_LEFT, y = print_title("TRANSACTIONS");
+    User *other = NULL;
+    mvprintw(y++, x, "Send to user with ID: ");
+    getstr(input);
+    unsigned int id = (unsigned int) atoi(input);
+    other = get_user_by_id(id);
+    if (other == NULL) {
+        mvprintw(y++, x, "Could not find a user with ID %u", id);
+        getch();
+        main_menu();
+    }
+    mvprintw(y++, x, "Amount: ");
+    getstr(input);
+    unsigned int amount = (unsigned int) atoi(input);
+    if (amount > current_user->balance) {
+        mvprintw(y++, x, "Insufficient funds");
+    } else {
+        current_user->balance -= amount;
+        other->balance += amount;
+        mvprintw(y++, x, "Transaction successful");
+    }
     getch();
     main_menu();
 }

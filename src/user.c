@@ -23,11 +23,23 @@ bool validate_password(char* password)
     return true;
 }
 
-User* get_user(char* username)
+User* get_user_by_name(char* username)
 {
     for (int i = 0; i < num_users; i++) {
         if (users[i]) {
             if (strcmp(users[i]->name, username) == 0) {
+                return users[i];
+            }
+        }
+    }
+    return NULL;
+}
+
+User* get_user_by_id(unsigned int id)
+{
+    for (int i = 0; i < num_users; i++) {
+        if (users[i]) {
+            if (users[i]->id == id) {
                 return users[i];
             }
         }
@@ -52,7 +64,7 @@ User* signup()
             refresh();
             continue;
         } else {
-            if (get_user(input)) {
+            if (get_user_by_name(input)) {
                 mvprintw(y - 2, MARGIN_LEFT, "User name already exists");
                 move(y - 1, MARGIN_LEFT + strlen("User name: "));
                 clrtoeol();
@@ -104,7 +116,7 @@ User* login()
             refresh();
             continue;
         } else {
-            User *user = get_user(input);
+            User *user = get_user_by_name(input);
             if (user) {
                 move(y, MARGIN_LEFT + strlen("Password: "));
                 noecho();

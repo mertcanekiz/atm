@@ -15,6 +15,8 @@ void change_username();
 void change_password();
 void delete_account();
 void withdraw_and_deposit();
+void withdraw_money();
+void deposit_money();
 void transactions();
 void account_details();
 void customer_list();
